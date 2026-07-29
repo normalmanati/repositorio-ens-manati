@@ -1,0 +1,304 @@
+/* ============================================================
+   Repositorio de Investigación — Escuela Normal Superior de Manatí
+   Sistema visual: "fichero institucional"
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  /* Paleta tomada del escudo: azul del blasón, sol dorado, borde rojo, hoja verde */
+  --ink:        #1B4A7C;   /* azul del escudo */
+  --ink-soft:   #2C6094;
+  --kraft:      #F2B705;   /* dorado del sol */
+  --kraft-dark: #C98F02;
+  --brass:      #9E2A2B;   /* rojo del borde/sello */
+  --paper:      #F5F4EF;   /* blanco plateado, como el filo del escudo */
+  --card:       #FFFFFF;
+  --text:       #1D1D1B;
+  --text-soft:  #55534C;
+  --line:       #DEDACC;
+  --ok:         #2E7D46;   /* verde de la hoja */
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans:  'Inter', -apple-system, sans-serif;
+  --mono:  'IBM Plex Mono', 'Courier New', monospace;
+
+  --radius: 3px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.55;
+}
+img{ max-width:100%; display:block; }
+a{ color: inherit; }
+
+.container{
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header institucional ---------- */
+.masthead{
+  background: var(--ink);
+  color: #fff;
+  border-bottom: 6px solid var(--brass);
+}
+.masthead-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding: 22px 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.masthead-id{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.masthead-crest{
+  width: 46px; height: 46px;
+  object-fit: contain;
+  flex-shrink:0;
+}
+.masthead-name{
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight:600;
+  line-height:1.2;
+}
+.masthead-tag{
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #C9D3DE;
+}
+.masthead-nav{
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing:.04em;
+  text-transform: uppercase;
+  color: #DCE3EA;
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  padding: 64px 24px 40px;
+  border-bottom: 1px solid var(--line);
+}
+.hero-eyebrow{
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 14px;
+}
+.hero h1{
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin: 0 0 16px;
+  max-width: 18ch;
+  color: var(--ink);
+}
+.hero p{
+  max-width: 62ch;
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+/* ---------- Barra de acreditación ---------- */
+.accred-strip{
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.accred-inner{
+  display:flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding: 18px 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.accred-item{
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-soft);
+}
+.accred-item strong{
+  display:block;
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--ink);
+  font-weight:700;
+}
+
+/* ---------- Buscador / filtros ---------- */
+.buscador{
+  padding: 36px 24px 8px;
+}
+.buscador-row{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom: 18px;
+}
+.buscador input[type="search"]{
+  flex: 1 1 260px;
+  padding: 11px 14px;
+  border: 1px solid var(--kraft-dark);
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  background: var(--card);
+  color: var(--text);
+}
+.buscador select{
+  padding: 11px 14px;
+  border: 1px solid var(--kraft-dark);
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  background: var(--card);
+  color: var(--text);
+}
+.buscador input:focus, .buscador select:focus{
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+.resultado-conteo{
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing:.04em;
+}
+
+/* ---------- Grilla de fichas (elemento firma) ---------- */
+.fichero{
+  padding: 24px 24px 80px;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.ficha{
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 20px 20px;
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.ficha:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(22,40,63,0.12);
+}
+/* muesca superior tipo carpeta de archivo */
+.ficha::before{
+  content:"";
+  position:absolute;
+  top:-1px; left: 20px;
+  width: 46px; height: 10px;
+  background: var(--kraft);
+  border: 1px solid var(--line);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+.ficha-codigo{
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--brass);
+  letter-spacing: .04em;
+}
+.ficha h3{
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--ink);
+}
+.ficha-meta{
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+.ficha-resumen{
+  font-size: 0.92rem;
+  color: var(--text-soft);
+  margin: 0;
+  flex:1;
+}
+.ficha-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+.ficha-linea{
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  background: var(--kraft);
+  color: var(--ink);
+  padding: 3px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.ficha-pdf{
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ok);
+}
+.ficha-pdf:hover{ color: var(--ok); }
+
+.vacio{
+  grid-column: 1/-1;
+  text-align:center;
+  padding: 60px 20px;
+  color: var(--text-soft);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+/* ---------- Footer ---------- */
+.pie{
+  background: var(--ink);
+  color: #C9D3DE;
+  padding: 28px 24px;
+  font-size: 0.82rem;
+}
+.pie-inner{
+  max-width: 1120px;
+  margin: 0 auto;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+@media (max-width: 560px){
+  .hero{ padding: 44px 20px 30px; }
+  .fichero{ padding: 20px 16px 60px; }
+}

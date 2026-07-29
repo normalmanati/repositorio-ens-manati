@@ -1,0 +1,12 @@
+{
+  "fichas": [
+    {
+      "titulo": "Ejemplo: Hábitos de lectura en estudiantes de básica primaria",
+      "autor": "Nombre Apellido (estudiante)",
+      "anio": "2026",
+      "linea": "Pedagogía y lenguaje",
+      "resumen": "Este es un proyecto de ejemplo. Reemplázalo o elimínalo desde el panel editor en /admin una vez publiques el sitio.",
+      "pdf": ""
+    }
+  ]
+}

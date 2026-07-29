@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repositorio de Investigación · Escuela Normal Superior de Manatí</title>
+<meta name="description" content="Repositorio institucional de proyectos de investigación de estudiantes de la Escuela Normal Superior de Manatí.">
+<link rel="icon" href="img/escudo.png">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-id">
+      <img class="masthead-crest" src="img/escudo.png" alt="Escudo de la Escuela Normal Superior de Manatí">
+      <div>
+        <div class="masthead-name">Escuela Normal Superior de Manatí</div>
+        <div class="masthead-tag">Repositorio institucional de investigación</div>
+      </div>
+    </div>
+    <nav class="masthead-nav">Consulta pública · Acceso editor en /admin</nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Fichero de proyectos estudiantiles</p>
+    <h1>Cada investigación, catalogada y disponible para su consulta.</h1>
+    <p>Este repositorio reúne los proyectos de investigación elaborados por estudiantes de la Normal, organizados como soporte documental para los procesos de autoevaluación y acreditación institucional. La consulta es abierta; la carga de contenido está a cargo del equipo editorial.</p>
+  </div>
+</section>
+
+<section class="accred-strip">
+  <div class="accred-inner">
+    <div class="accred-item"><strong id="conteo-total">0</strong>proyectos catalogados</div>
+    <div class="accred-item"><strong id="conteo-lineas">0</strong>líneas de investigación</div>
+    <div class="accred-item"><strong id="conteo-anios">0</strong>años cubiertos</div>
+  </div>
+</section>
+
+<section class="buscador container">
+  <div class="buscador-row">
+    <input type="search" id="buscar" placeholder="Buscar por título, autor o palabra clave…" aria-label="Buscar proyectos">
+    <select id="filtro-linea" aria-label="Filtrar por línea de investigación">
+      <option value="">Todas las líneas</option>
+    </select>
+    <select id="filtro-anio" aria-label="Filtrar por año">
+      <option value="">Todos los años</option>
+    </select>
+  </div>
+  <p class="resultado-conteo" id="resultado-conteo">Cargando fichero…</p>
+</section>
+
+<main class="fichero" id="fichero">
+  <!-- las fichas se insertan aquí por JavaScript -->
+</main>
+
+<footer class="pie">
+  <div class="pie-inner">
+    <span>© <span id="anio-actual"></span> Escuela Normal Superior de Manatí</span>
+    <span>Repositorio con fines de acreditación institucional</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('anio-actual').textContent = new Date().getFullYear();
+
+const el = {
+  fichero: document.getElementById('fichero'),
+  buscar: document.getElementById('buscar'),
+  linea: document.getElementById('filtro-linea'),
+  anio: document.getElementById('filtro-anio'),
+  conteo: document.getElementById('resultado-conteo'),
+  total: document.getElementById('conteo-total'),
+  totalLineas: document.getElementById('conteo-lineas'),
+  totalAnios: document.getElementById('conteo-anios'),
+};
+
+let fichas = [];
+
+function escapeHtml(str){
+  return String(str || '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+}
+
+function codigo(f, i){
+  const anio = f.anio || '----';
+  return 'INV-' + anio + '-' + String(i + 1).padStart(3, '0');
+}
+
+function render(){
+  const q = el.buscar.value.trim().toLowerCase();
+  const lineaSel = el.linea.value;
+  const anioSel = el.anio.value;
+
+  const filtradas = fichas.filter((f, i) => {
+    const texto = (f.titulo + ' ' + f.autor + ' ' + (f.resumen||'')).toLowerCase();
+    if (q && !texto.includes(q)) return false;
+    if (lineaSel && f.linea !== lineaSel) return false;
+    if (anioSel && String(f.anio) !== anioSel) return false;
+    return true;
+  });
+
+  el.conteo.textContent = filtradas.length + (filtradas.length === 1 ? ' proyecto encontrado' : ' proyectos encontrados');
+
+  if (filtradas.length === 0){
+    el.fichero.innerHTML = '<div class="vacio">No se encontraron proyectos con esos criterios.</div>';
+    return;
+  }
+
+  el.fichero.innerHTML = filtradas.map((f) => {
+    const idxOriginal = fichas.indexOf(f);
+    return `
+      <article class="ficha">
+        <div class="ficha-codigo">${codigo(f, idxOriginal)}</div>
+        <h3>${escapeHtml(f.titulo)}</h3>
+        <div class="ficha-meta">${escapeHtml(f.autor)} · ${escapeHtml(f.anio || 's.f.')}</div>
+        <p class="ficha-resumen">${escapeHtml(f.resumen)}</p>
+        <div class="ficha-footer">
+          <span class="ficha-linea">${escapeHtml(f.linea || 'Sin línea')}</span>
+          ${f.pdf ? `<a class="ficha-pdf" href="${escapeHtml(f.pdf)}" target="_blank" rel="noopener">Ver PDF ↗</a>` : ''}
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function poblarFiltros(){
+  const lineas = [...new Set(fichas.map(f => f.linea).filter(Boolean))].sort();
+  const anios = [...new Set(fichas.map(f => f.anio).filter(Boolean))].sort().reverse();
+
+  el.linea.innerHTML = '<option value="">Todas las líneas</option>' +
+    lineas.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join('');
+  el.anio.innerHTML = '<option value="">Todos los años</option>' +
+    anios.map(a => `<option value="${escapeHtml(a)}">${escapeHtml(a)}</option>`).join('');
+
+  el.total.textContent = fichas.length;
+  el.totalLineas.textContent = lineas.length;
+  el.totalAnios.textContent = anios.length;
+}
+
+fetch('content/fichas.json')
+  .then(r => r.json())
+  .then(data => {
+    fichas = (data.fichas || []).slice().reverse(); // más recientes primero
+    poblarFiltros();
+    render();
+  })
+  .catch(() => {
+    el.conteo.textContent = 'No fue posible cargar el fichero.';
+    el.fichero.innerHTML = '<div class="vacio">Aún no hay proyectos publicados.</div>';
+  });
+
+el.buscar.addEventListener('input', render);
+el.linea.addEventListener('change', render);
+el.anio.addEventListener('change', render);
+</script>
+
+</body>
+</html>

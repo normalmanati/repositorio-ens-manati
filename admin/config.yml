@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Carpeta donde se guardan los PDF y otros archivos que subas desde el panel
+media_folder: "uploads"
+public_folder: "/uploads"
+
+# Solo permite iniciar sesión a personas invitadas (ver README paso 4)
+locale: "es"
+
+collections:
+  - name: "fichas"
+    label: "Fichas de investigación"
+    label_singular: "Ficha"
+    description: "Cada ficha es un proyecto de investigación estudiantil publicado en el repositorio."
+    files:
+      - name: "fichas"
+        label: "Listado de fichas"
+        file: "content/fichas.json"
+        fields:
+          - name: "fichas"
+            label: "Proyectos"
+            widget: "list"
+            summary: "{{titulo}} — {{autor}} ({{anio}})"
+            fields:
+              - { name: "titulo", label: "Título del proyecto", widget: "string" }
+              - { name: "autor", label: "Autor(es)", widget: "string", hint: "Nombre del o los estudiantes" }
+              - { name: "anio", label: "Año", widget: "string", pattern: ['^[0-9]{4}$', "Debe ser un año de 4 dígitos, ej. 2026"] }
+              - { name: "linea", label: "Línea de investigación", widget: "string", hint: "Ej. Pedagogía y lenguaje, Convivencia escolar, Ciencias naturales..." }
+              - { name: "resumen", label: "Resumen", widget: "text", hint: "3 a 6 líneas describiendo el proyecto" }
+              - { name: "pdf", label: "Documento PDF", widget: "file", media_library: { config: { multiple: false } }, hint: "Sube el PDF completo del proyecto" }
