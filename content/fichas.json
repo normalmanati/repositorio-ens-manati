@@ -1,12 +1,12 @@
 {
   "fichas": [
     {
-      "titulo": "Ejemplo: Hábitos de lectura en estudiantes de básica primaria",
-      "autor": "Nombre Apellido (estudiante)",
+      "titulo": "La escritura como práctica social y creativa: fortalecimiento de los procesos de escritura en los estudiantes de quinto grado de la Institución Educativa San José Aguada de Pablo.",
+      "autor": "Lubo Vacca, Omar Eliecer; Baena Hernández, Johandrys; Cabarcas Medina, Anays; Coronado Lerma, Diana; Cuentas de León, Valentina; Leyva Velasquez, María: Tovar Castillo, Keren.",
       "anio": "2026",
-      "linea": "Pedagogía y lenguaje",
-      "resumen": "Este es un proyecto de ejemplo. Reemplázalo o elimínalo desde el panel editor en /admin una vez publiques el sitio.",
-      "pdf": ""
+      "resumen": "Este artículo presenta reflexiones críticas y una propuesta pedagógica para fortalecer los procesos de escritura en la Institución Educativa San José de Aguada de Pablo. A través de una prueba diagnóstica y observación directa, se identificaron dificultades principalmente en propiedades textuales como la\ncoherencia y la cohesión, vinculadas al impacto de la educación virtual durante la pandemia en la escolaridad inicial. El estudio propone un plan de intervención con base en las teorías de Ferreiro y Teberosky (1979) y Cassany (2006) para fomentar la escritura como una práctica social y creativa al\ntiempo que se fortalecen elementos necesarios para la redacción. Este plan de intervención tiene como\neje articulador la lectura como principal estrategia para aproximar a los estudiantes a las textualidades y a las particularidades del formato escrito. Se observa en los resultados que los estudiantes lograron transitar de oraciones breves a párrafos cohesionados por medio de conectores, y se evidenció una mejora en la coherencia global del texto, así como unas relaciones horizontales con la escritura donde esta pasó de ser una obligación a una herramienta de expresión creativa.",
+      "pdf": "/uploads/1-escritura-en-los-estudiantes-1-.pdf",
+      "linea": "Didáctica-disciplinar en el aula"
     }
   ]
 }
