@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: TU-USUARIO-DE-GITHUB/repositorio-ens-manati   # <-- reemplaza TU-USUARIO-DE-GITHUB por tu usuario real de GitHub
   branch: main
 
 # Carpeta donde se guardan los PDF y otros archivos que subas desde el panel

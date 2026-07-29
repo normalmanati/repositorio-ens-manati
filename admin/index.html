@@ -7,18 +7,7 @@
   <meta name="robots" content="noindex">
 </head>
 <body>
-  <!-- Incluye el widget de identidad de Netlify (control de acceso) -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
-        }
-      });
-    }
-  </script>
-  <!-- Panel Decap CMS -->
+  <!-- Panel Decap CMS: inicia sesión con tu cuenta de GitHub -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>

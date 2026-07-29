@@ -26,22 +26,20 @@ No necesitas tocar código para el uso diario. El código ya está listo; solo l
 4. En un par de minutos tendrás una URL como `nombre-al-azar.netlify.app`. Ese ya es tu sitio público.
    - Opcional: en **Site configuration → Domain management** puedes ponerle un nombre más claro (gratis, ej. `repositorio-ensmanati.netlify.app`) o conectar un dominio propio si más adelante consigues uno.
 
-## Paso 3 · Activar tu acceso de editora (Identity + Git Gateway)
+## Paso 3 · Activar tu acceso de editora (login con GitHub)
 
-Esto es lo que hace que **solo tú** puedas entrar a `/admin`.
+Esto es lo que hace que **solo tú** puedas entrar a `/admin`. Como tú eres la dueña del repositorio, iniciar sesión con tu propia cuenta de GitHub ya te da acceso — sin sistema de usuarios aparte.
 
-1. En el panel de Netlify, entra a tu sitio → **Integrations → Identity → Enable Identity**.
-2. En **Identity → Settings**, en "Registration preferences" selecciona **Invite only** (así nadie más se puede registrar).
-3. Baja a **Services → Git Gateway → Enable Git Gateway** (esto permite que el panel guarde los cambios en GitHub sin que tú necesites saber usar Git).
-4. Vuelve a la pestaña **Identity** y da clic en **Invite users**. Escribe tu propio correo.
-5. Revisa tu correo, acepta la invitación y crea tu contraseña.
+1. Edita `admin/config.yml` directamente en GitHub (ícono del lápiz ✏️) y reemplaza `TU-USUARIO-DE-GITHUB` por tu usuario real de GitHub. Guarda el cambio.
+2. En [github.com/settings/developers](https://github.com/settings/developers) → **OAuth Apps** → **New OAuth App**. Como **Authorization callback URL** pon exactamente `https://api.netlify.com/auth/done`. Registra la aplicación y copia el **Client ID** y el **Client Secret**.
+3. En Netlify: **Project configuration → Access & security → OAuth → Install provider → GitHub**, y pega ahí el Client ID y el Client Secret.
 
-Con esto, solo las personas que tú invites (en este caso, solo tú) podrán entrar al panel.
+Con esto, solo quien tenga acceso de escritura a tu repositorio de GitHub (o sea, solo tú) podrá entrar al panel.
 
 ## Paso 4 · Empezar a cargar fichas
 
 1. Entra a `tusitio.netlify.app/admin`.
-2. Inicia sesión con el correo y contraseña del paso anterior.
+2. Clic en **Login with GitHub** y autoriza el acceso (solo la primera vez).
 3. Verás la colección **"Fichas de investigación"**. Da clic en **Nuevo → Listado de fichas** (o edita el listado existente) y agrega un ítem por cada proyecto: título, autor, año, línea de investigación, resumen y el PDF.
 4. Da clic en **Publish**. En 1-2 minutos el sitio público se actualiza solo.
 5. Puedes borrar la ficha de ejemplo que trae `content/fichas.json` una vez publiques las tuyas.
@@ -53,9 +51,10 @@ Con esto, solo las personas que tú invites (en este caso, solo tú) podrán ent
 - **Colores y tipografía:** todo está en `css/estilos.css`, con comentarios.
 - **Textos de la portada:** están directamente en `index.html` (el bloque `<section class="hero">`).
 - **Líneas de investigación:** no hay una lista cerrada — escribes el nombre de la línea libremente al cargar cada ficha, así puedes ajustarlas con el tiempo.
-- **Escudo/logo:** por ahora se muestra un círculo con "ENS". Si me compartes el logo real de la institución, lo integro.
+- **Escudo/logo:** ya está integrado (`img/escudo.png`), tomado del escudo real de la institución.
 
 ## Si algo falla
 
-- Si `/admin` no carga el login: revisa que Identity y Git Gateway estén ambos en verde en Netlify (Paso 3).
+- Si `/admin` no carga el login o da error al autenticar: revisa que el **Client ID** y **Client Secret** en Netlify (Paso 3) sean exactamente los que copiaste de GitHub, y que la **Authorization callback URL** en GitHub sea exactamente `https://api.netlify.com/auth/done`.
+- Si ves un error de "repo not found" en el panel: revisa que en `admin/config.yml` el campo `repo:` tenga tu usuario de GitHub correcto y el nombre exacto del repositorio.
 - Si publicas una ficha y no aparece en el sitio público: espera 1-2 minutos y refresca — Netlify vuelve a desplegar el sitio en cada cambio.
