@@ -5,3 +5,8 @@
   for = "/admin/*"
   [headers.values]
     X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
